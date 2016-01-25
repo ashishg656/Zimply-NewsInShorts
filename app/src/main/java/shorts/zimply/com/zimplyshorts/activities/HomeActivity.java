@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
@@ -27,7 +29,7 @@ import shorts.zimply.com.zimplyshorts.serverApi.ZUrls;
 /**
  * Created by Ashish Goel on 1/24/2016.
  */
-public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppRequestListener {
+public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppRequestListener, ViewPager.OnPageChangeListener {
 
     VerticalViewPager viewPager;
     MyPagerAdapter adapter;
@@ -45,8 +47,14 @@ public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppReque
         mData = new ArrayList<>();
 
         viewPager = (VerticalViewPager) findViewById(R.id.homeviewpager);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         viewPager.setPageTransformer(true, new DepthPageTransformer());
+        viewPager.setOnPageChangeListener(this);
+
+        toolbar.setBackgroundColor(getResources().getColor(R.color.black_50_alpha));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Zimply Shorts");
 
         loadData();
     }
@@ -83,23 +91,42 @@ public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppReque
     @Override
     public void onRequestStarted(String requestTag) {
         if (requestTag.equals(HOME_NEWS_REQUEST_TAG)) {
-
+            isRequestRunning = true;
         }
     }
 
     @Override
     public void onRequestFailed(String requestTag, VolleyError error) {
         if (requestTag.equals(HOME_NEWS_REQUEST_TAG)) {
-
+            isRequestRunning = false;
         }
     }
 
     @Override
     public void onRequestCompleted(String requestTag, String response) {
         if (requestTag.equals(HOME_NEWS_REQUEST_TAG)) {
+            isRequestRunning = false;
             HomeActivityObjectList obj = new Gson().fromJson(response, HomeActivityObjectList.class);
             setPagerAdapter(obj);
         }
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        int diff = mData.size() - position;
+        if (diff < 5 && isMoreAllowed && !isRequestRunning) {
+            loadData();
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     class MyPagerAdapter extends FragmentPagerAdapter {
