@@ -11,7 +11,7 @@ public class HomeActivityObjectSingle implements Parcelable {
     String desc, slug, img, title;
     boolean isZimplyPage;
 
-    protected HomeActivityObjectSingle(Parcel in) {
+    public HomeActivityObjectSingle(Parcel in) {
         desc = in.readString();
         slug = in.readString();
         img = in.readString();
@@ -30,6 +30,10 @@ public class HomeActivityObjectSingle implements Parcelable {
             return new HomeActivityObjectSingle[size];
         }
     };
+
+    public HomeActivityObjectSingle() {
+
+    }
 
     public String getDesc() {
         return desc;

@@ -33,27 +33,11 @@ android {
 }
 
 dependencies {
+    compile project(":volley")
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.+'
     compile 'com.android.support:design:23+'
-
-    compile('org.apache.httpcomponents:httpmime:4.3.6') {
-        exclude module: 'httpclient'
-    }
-    compile 'org.apache.httpcomponents:httpclient-android:4.3.5'
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.google.code.gson:gson:2.2.4'
-
-    // google play services
-    compile 'com.google.android.gms:play-services-gcm:7.0.0'
-    compile 'com.google.android.gms:play-services-identity:7.0.0'
-    compile 'com.google.android.gms:play-services-plus:7.0.0'
-    compile 'com.google.android.gms:play-services-base:7.0.0'
-    compile 'com.google.android.gms:play-services-location:7.0.0'
-    compile 'com.google.android.gms:play-services-maps:7.0.0'
-    compile 'com.google.android.gms:play-services-appindexing:7.0.0'
-    compile 'com.google.android.gms:play-services-analytics:7.0.0'
-    //nine olds library
-    compile 'com.nineoldandroids:library:2.4.0'
 }
