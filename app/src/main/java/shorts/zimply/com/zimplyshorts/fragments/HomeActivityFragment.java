@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import shorts.zimply.com.zimplyshorts.R;
 import shorts.zimply.com.zimplyshorts.objects.HomeActivityObjectSingle;
+import shorts.zimply.com.zimplyshorts.utls.ImageRequestManager;
 
 /**
  * Created by Ashish Goel on 1/24/2016.
@@ -48,6 +49,9 @@ public class HomeActivityFragment extends Fragment {
             description.setVisibility(View.GONE);
         }
 
+        title.setText(mData.getTitle());
+        description.setText(mData.getDesc());
 
+        ImageRequestManager.get(getActivity()).requestImage(getActivity(), image, mData.getImg());
     }
 }

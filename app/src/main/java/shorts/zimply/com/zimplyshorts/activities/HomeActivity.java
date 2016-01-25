@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
@@ -13,7 +12,9 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 import shorts.zimply.com.zimplyshorts.R;
+import shorts.zimply.com.zimplyshorts.animation.DepthPageTransformer;
 import shorts.zimply.com.zimplyshorts.application.AppApplication;
 import shorts.zimply.com.zimplyshorts.fragments.HomeActivityFragment;
 import shorts.zimply.com.zimplyshorts.objects.HomeActivityObjectList;
@@ -28,7 +29,7 @@ import shorts.zimply.com.zimplyshorts.serverApi.ZUrls;
  */
 public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppRequestListener {
 
-    ViewPager viewPager;
+    VerticalViewPager viewPager;
     MyPagerAdapter adapter;
     List<HomeActivityObjectSingle> mData;
 
@@ -43,7 +44,9 @@ public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppReque
 
         mData = new ArrayList<>();
 
-        viewPager = (ViewPager) findViewById(R.id.homeviewpager);
+        viewPager = (VerticalViewPager) findViewById(R.id.homeviewpager);
+
+        viewPager.setPageTransformer(true, new DepthPageTransformer());
 
         loadData();
     }

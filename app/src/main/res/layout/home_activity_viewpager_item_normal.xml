@@ -15,32 +15,40 @@
         <ImageView
             android:id="@+id/homeviewpagerimage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/title"
+    <LinearLayout
+        android:background="@color/white_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/margin_large"
-        android:paddingRight="@dimen/margin_large"
-        android:paddingTop="@dimen/margin_large"
-        android:text="Title"
-        android:textColor="@color/text_color_dark"
-        android:textSize="@dimen/font_small"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/margin_large"
-        android:paddingLeft="@dimen/margin_large"
-        android:paddingRight="@dimen/margin_large"
-        android:paddingTop="@dimen/margin_large"
-        android:text="Title"
-        android:textColor="@color/text_color_dark"
-        android:textSize="@dimen/font_mini"
-        android:textStyle="normal" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/margin_large"
+            android:paddingRight="@dimen/margin_large"
+            android:paddingTop="@dimen/margin_large"
+            android:text="Title"
+            android:textColor="@color/text_color_dark"
+            android:textSize="@dimen/font_small"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_large"
+            android:paddingLeft="@dimen/margin_large"
+            android:paddingRight="@dimen/margin_large"
+            android:paddingTop="@dimen/margin_small"
+            android:text="Title"
+            android:textColor="@color/text_color_dark"
+            android:textSize="@dimen/font_mini"
+            android:textStyle="normal" />
+    </LinearLayout>
 
 </LinearLayout>
