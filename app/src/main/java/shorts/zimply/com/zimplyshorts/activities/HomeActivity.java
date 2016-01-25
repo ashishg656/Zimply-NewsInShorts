@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
@@ -47,14 +46,9 @@ public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppReque
         mData = new ArrayList<>();
 
         viewPager = (VerticalViewPager) findViewById(R.id.homeviewpager);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         viewPager.setPageTransformer(true, new DepthPageTransformer());
         viewPager.setOnPageChangeListener(this);
-
-        toolbar.setBackgroundColor(getResources().getColor(R.color.black_50_alpha));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Zimply Shorts");
 
         loadData();
     }
