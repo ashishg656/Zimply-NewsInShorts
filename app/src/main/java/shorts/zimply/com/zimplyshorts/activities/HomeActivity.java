@@ -18,6 +18,7 @@ import shorts.zimply.com.zimplyshorts.R;
 import shorts.zimply.com.zimplyshorts.animation.DepthPageTransformer;
 import shorts.zimply.com.zimplyshorts.application.AppApplication;
 import shorts.zimply.com.zimplyshorts.fragments.HomeActivityFragment;
+import shorts.zimply.com.zimplyshorts.fragments.HomeZimplyFragment;
 import shorts.zimply.com.zimplyshorts.objects.HomeActivityObjectList;
 import shorts.zimply.com.zimplyshorts.objects.HomeActivityObjectSingle;
 import shorts.zimply.com.zimplyshorts.serverApi.AppRequestListener;
@@ -64,7 +65,7 @@ public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppReque
 
         HomeActivityObjectSingle zimplyObj = new HomeActivityObjectSingle();
         zimplyObj.setZimplyPage(true);
-        zimplyObj.setImg("http://decofilia.com/blog/wp-content/uploads/2013/12/como-decorar-salones-con-papel-pintado-01.jpg");
+        zimplyObj.setImg("http://m.zimply.in/furniture-category-4");
         mData.add(zimplyObj);
 
         if (obj.getNext_page() == null)
@@ -133,7 +134,12 @@ public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppReque
         public Fragment getItem(int position) {
             Bundle bundle = new Bundle();
             bundle.putParcelable("obj", mData.get(position));
-            return HomeActivityFragment.newInstance(bundle);
+            bundle.putInt("pos", position);
+
+            if (mData.get(position).isZimplyPage())
+                return HomeZimplyFragment.newInstance(bundle);
+            else
+                return HomeActivityFragment.newInstance(bundle);
         }
 
         @Override

@@ -44,11 +44,6 @@ public class HomeActivityFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mData = getArguments().getParcelable("obj");
 
-        if (mData.isZimplyPage()) {
-            title.setVisibility(View.GONE);
-            description.setVisibility(View.GONE);
-        }
-
         title.setText(mData.getTitle());
         description.setText(mData.getDesc());
 
