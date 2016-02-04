@@ -45,6 +45,7 @@ public class HomeZimplyFragment extends Fragment {
         position = getArguments().getInt("pos");
 
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setLoadsImagesAutomatically(true);
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
