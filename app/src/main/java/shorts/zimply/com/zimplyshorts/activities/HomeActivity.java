@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
@@ -29,7 +31,7 @@ import shorts.zimply.com.zimplyshorts.serverApi.ZUrls;
 /**
  * Created by Ashish Goel on 1/24/2016.
  */
-public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppRequestListener, ViewPager.OnPageChangeListener {
+public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppRequestListener, ViewPager.OnPageChangeListener, View.OnClickListener {
 
     VerticalViewPager viewPager;
     MyPagerAdapter adapter;
@@ -39,6 +41,8 @@ public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppReque
     boolean isRequestRunning;
     boolean isMoreAllowed;
 
+    FrameLayout crossImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +50,14 @@ public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppReque
 
         mData = new ArrayList<>();
 
+        crossImage = (FrameLayout) findViewById(R.id.framelayoutcrossimage);
         viewPager = (VerticalViewPager) findViewById(R.id.homeviewpager);
 
         viewPager.setPageTransformer(true, new DepthPageTransformer());
         viewPager.setOnPageChangeListener(this);
+
+        crossImage.setOnClickListener(this);
+        crossImage.setVisibility(View.GONE);
 
         loadData();
     }
@@ -117,11 +125,30 @@ public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppReque
         if (diff < 5 && isMoreAllowed && !isRequestRunning) {
             loadData();
         }
+
+        if (mData.get(viewPager.getCurrentItem()).isZimplyPage()) {
+            crossImage.setVisibility(View.VISIBLE);
+        } else {
+            crossImage.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
+        if (state == ViewPager.SCROLL_STATE_IDLE && mData.get(viewPager.getCurrentItem()).isZimplyPage()) {
+            crossImage.setVisibility(View.VISIBLE);
+        } else {
+            crossImage.setVisibility(View.GONE);
+        }
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.framelayoutcrossimage:
+                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
+                break;
+        }
     }
 
     class MyPagerAdapter extends FragmentPagerAdapter {

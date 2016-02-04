@@ -27,4 +27,20 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/framelayoutcrossimage"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="right"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/bs_ic_clear" />
+    </FrameLayout>
+
 </FrameLayout>
