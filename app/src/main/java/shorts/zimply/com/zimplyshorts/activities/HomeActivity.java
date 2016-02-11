@@ -146,7 +146,10 @@ public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppReque
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.framelayoutcrossimage:
-                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
+                mData.remove(viewPager.getCurrentItem());
+                adapter.notifyDataSetChanged();
+
+                viewPager.setCurrentItem(viewPager.getCurrentItem() - 1, true);
                 break;
         }
     }
@@ -172,6 +175,22 @@ public class HomeActivity extends BaseActivity implements ZUrls, ZTags, AppReque
         @Override
         public int getCount() {
             return mData.size();
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            Fragment fragment = (Fragment) object;
+            HomeActivityObjectSingle obj = (HomeActivityObjectSingle) fragment.getArguments().getParcelable("obj");
+            int pos = fragment.getArguments().getInt("pos");
+
+            try {
+                if (mData.get(pos).getDesc().equals(obj.getDesc())) {
+                    return POSITION_UNCHANGED;
+                } else
+                    return POSITION_NONE;
+            } catch (Exception e) {
+                return POSITION_NONE;
+            }
         }
     }
 }
